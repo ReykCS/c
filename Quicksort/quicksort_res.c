@@ -1,12 +1,3 @@
-/* === INTROPROG ABGABE ===
- * Blatt 10, Aufgabe 1
- * Tutorium: t21
- * Gruppe: g18
- * Gruppenmitglieder:
- *  - Erik Rygiel
- *  - Reyk Carstens
- * ========================
- */
 
 #define _POSIX_C_SOURCE 200809L
 #include <stdio.h>
@@ -15,25 +6,14 @@
 #include <assert.h>
 #include "quicksort.h"
 
-/*****************************************************
- * Die benoetigten structs findet Ihr in quicksort.h *
- *****************************************************/
-
 void init_list(list* mylist)
 {
-  // HIER Liste initialisieren
-  //mylist = malloc(sizeof(list));
   mylist->first = NULL;
   mylist->last = NULL;
 }
 
-
-
-// Diese Funktion fügt Listenelemente an die Liste an
 void insert_list(list_element* le, list* mylist)
 {
-    // HIER Code einfügen
-  // printf("liste: %s, %d\n", le->password, le->count);
   if ( mylist->first == NULL )  {
     mylist->first = le;
     mylist->last = le;
@@ -44,7 +24,6 @@ void insert_list(list_element* le, list* mylist)
   mylist->last->next = NULL;
 }
 
-// Speicher für Listenelemente wieder freigeben
 void free_list(list* mylist)
 {
   if ( mylist->first == NULL )  {
@@ -58,13 +37,9 @@ void free_list(list* mylist)
 }
 
 
-// Namen, Zahlen Paare in Liste einlesen
 void read_data(char* filename, list* mylist)
 {
-		// HIER Code einfügen:
-        // * Speicher allozieren
-        // * Daten in list_element einlesen
-        // * insert_list benutzen, um list_element in Liste einzufügen
+		
   FILE *fp;
 
   fp = fopen(filename, "r");
@@ -116,14 +91,12 @@ void read_data(char* filename, list* mylist)
   fclose(fp);
 }
 
-// Liste teilen. Teillisten werden in left und right zurück gegeben
 list_element* partition( list* input, list* left, list* right )
 {
-    // HIER Code einfügen:
-    // parition() Funktion implementieren
+ 
     list_element* pivot = input->first;
     list_element* next = input->first->next;
-    while(next != NULL ) {//|| next == input->last )  {
+    while(next != NULL ) {
       list_element* temp = next->next;
       if ( next->count < pivot->count ) {
         insert_list(next, left);
@@ -135,10 +108,8 @@ list_element* partition( list* input, list* left, list* right )
     return pivot;
 }
 
-// Hauptfunktion des quicksort Algorithmus
 void qsort_list(list* mylist)
 {
-    // HIER Code einfügen
     if ( mylist->first == mylist->last || mylist->first == NULL || mylist->last == NULL)  {
       return;
     }
@@ -166,11 +137,8 @@ void qsort_list(list* mylist)
     free(right);
 }
 
-// Liste ausgeben
 void print_list(list* mylist)
 {
-    // HIER Code einfügen:
-    // * Laufe über die list_element in mylist und gebe sie aus.
     list_element *temp = mylist->first;
     while( temp != NULL ) {
       printf("%s %d\n", temp->password, temp->count);
